@@ -8,7 +8,7 @@ addpath('utils/xlwrite');
 addpath('utils/xlwrite/poi_library');
 if ismac
     run('utils/xlwrite/firstlaunch_xlwrite.m');
-    disp('Added Mac export compatibility');
+    disp('Added Mac export capability.');
 end
 
 [file, path] = uigetfile('*.xlsx');
@@ -342,16 +342,26 @@ disp('------------------------------');
 
 
 for currentEvent = 1:size(newMatrix,3)
+    disp(['Exporting ', eventNames{currentEvent}, '...']);
     numFilledColumns = sum(~cellfun(@isempty,newMatrix(:,:,currentEvent)),2);
     [ranks_ordered, idx] = sort(numFilledColumns, 'descend');
     newMatrix(:,:,currentEvent) = newMatrix(idx,:,currentEvent);
     sheet = eventNames{currentEvent};
+    try
     if ismac
-        xlwrite(filename,newMatrix(:,:,currentEvent),sheet);
+        tempFilename = [filename(1:end-5),'_',sheet,'.xlsx'];
+        xlwrite(tempFilename,newMatrix(:,:,currentEvent));
+        disp('Done');
+        disp([sheet, ' saved to ', filename]);
     else
         xlswrite(filename,newMatrix(:,:,currentEvent),sheet);
+        disp('Done');
     end
-    disp(['Exported ', eventNames{currentEvent}]);
+    catch
+        disp('<strong>*Export Failed*</strong>');
+        disp('If running on Mac, ensure Java is up to date.');
+    end
+    
     disp('------------------------------');
 end
 warning on;
@@ -380,8 +390,8 @@ end
 
 data_cleaned = newMatrix;
 disp('------------------------------');
-fprintf('Done.\nCleaned data saved to:');
-disp(filename);
+fprintf('Done.\nCleaned data saved to: ');
+disp(path);
 disp('Data are available in the MatLab workspace as ''data_cleaned''');
 
 try
@@ -401,7 +411,7 @@ function [inputData] = appendDiagnoses(inputData)
             end
         end
         
-        [dFile, dPath] = uigetfile('*xlsx','Select Clinical Conductor patient list'); % get list of CC diagnoses
+        [dFile, dPath] = uigetfile('*.xlsx','Select Clinical Conductor patient list'); % get list of CC diagnoses
         [ddInt, ddStr, ddRaw] = xlsread(fullfile(dPath,dFile));
         startIdx = find(contains(ddStr(:,1),'Participant Code'),1) + 1;
         endIdx = size(ddStr,1);
