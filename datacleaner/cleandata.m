@@ -332,7 +332,8 @@ disp('Preparing for export...');
 disp('------------------------------');
 if ismac
     run firstlaunch_xlwrite.m
-    xlwrite(filename,studyMetadata,'Metadata');
+    tempFilename = [filename(1:end-5),'_Metadata','.xlsx'];
+    xlwrite(tempFilename,studyMetadata,'Metadata');
     disp('Exported Metadata');
 else
     xlswrite(filename,studyMetadata,'Metadata');
@@ -352,7 +353,7 @@ for currentEvent = 1:size(newMatrix,3)
         tempFilename = [filename(1:end-5),'_',sheet,'.xlsx'];
         xlwrite(tempFilename,newMatrix(:,:,currentEvent));
         disp('Done');
-        disp([sheet, ' saved to ', filename]);
+        disp([sheet, ' saved to ', tempFilename]);
     else
         xlswrite(filename,newMatrix(:,:,currentEvent),sheet);
         disp('Done');
