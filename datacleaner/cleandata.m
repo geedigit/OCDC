@@ -6,6 +6,10 @@ clc;
 addpath('utils');
 addpath('utils/xlwrite');
 addpath('utils/xlwrite/poi_library');
+if ismac
+    run('utils/xlwrite/firstlaunch_xlwrite.m');
+    disp('Added Mac export compatibility');
+end
 
 [file, path] = uigetfile('*.xlsx');
 cd(path);
@@ -404,7 +408,7 @@ function [inputData] = appendDiagnoses(inputData)
         prompt = {'Enter diagnosis:'};
         dlgtitle = 'Input';
         dims = [1 35];
-        definput = {'20','hsv'};
+        definput = {'Diagnosis','hsv'};
         answer = inputdlg(prompt,dlgtitle,dims,definput);
         
         for currentLeaf = 1:size(inputData,3)
