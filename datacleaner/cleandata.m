@@ -247,7 +247,7 @@ end
 %% Find Specific Questionnaires
 % TOTHINK: A BETTER APPROACH WOULD BE DOWN THE TWO-TIER "UNIQUE-NON-UNIQUE"
 % PATHWAY - SUBSTRING 1 SHOULD ALWAYS BE UNIQUE, SUBSTRING 2 SHOULD NEVER
-% BE UNIQUE...
+% BE UNIQUE, ETC. BLAH BLAH BLAH
 global selectedItems;
 selectSubs = false;
 selectSubs = questdlg('Select specific questionnaires/categories?', ...
@@ -289,7 +289,7 @@ if selectSubs
     btnDone = uibutton(fig,'Position',[10 10 180 25],'Text','Done','ButtonPushedFcn', @(btn,event) getListBoxItems(btn,catList.Value));
     
     while isempty(selectedItems)
-        drawnow
+        drawnow;
     end
     
     % Now remove all columns from the array that don't contain the selected
@@ -328,6 +328,7 @@ end
 % Sort rows in descending order of most populated columns and then export
 warning off;
 filename = [fullfile(path),'CLEANED_',num2str(floor(posixtime(datetime('now')))),'_', fullfile(file)];
+disp('Preparing for export...');
 disp('------------------------------');
 if ismac
     run firstlaunch_xlwrite.m
@@ -416,7 +417,7 @@ function [inputData] = appendDiagnoses(inputData)
                 for currentParticipant = 1:size(participantList,1)
                     if strcmp(inputData{currentRow,1,currentLeaf},participantList{currentParticipant,1})
                         inputData{currentRow,2,currentLeaf} = char(answer);
-                        disp(['Appended diagnosis to participant ', inputData{currentRow,1,currentLeaf}]);
+                        disp(['Appended diagnosis ''' answer ''' to participant ', inputData{currentRow,1,currentLeaf}]);
                     end
                 end
             end
