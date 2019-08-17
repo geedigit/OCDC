@@ -291,6 +291,7 @@ if selectSubs
     while isempty(selectedItems)
         drawnow;
     end
+    delete(fig);
     
     % Now remove all columns from the array that don't contain the selected
     % items
@@ -299,7 +300,6 @@ if selectSubs
         tempTopRow = newMatrix(1,:,currentLeaf);
         tempTopRow(cellfun(@(tempTopRow) any(isempty(tempTopRow)),tempTopRow)) = []; % Remove empty cells
         tempTopRow(cellfun(@(tempTopRow) any(isnan(tempTopRow)),tempTopRow)) = []; % Remove cells with NaNs
-        selectedItems
         keepIdx = contains(tempTopRow,selectedItems);
         tempMatrix = newMatrix(:,keepIdx==1,currentLeaf);
         newMatrix(:,:,currentLeaf) = cell(size(newMatrix,1),size(newMatrix,2));
