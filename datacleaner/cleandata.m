@@ -314,8 +314,8 @@ for currentLeaf = 1:size(newMatrix,3)
 end
 
 %% Add Patient Diagnoses
-addDiagnosisQ = questdlg('Attach diagnoses to each participant?', ...
-    'Add diagnoses', ...
+addDiagnosisQ = questdlg('Append diagnoses, DOBs and gender to each participant?', ...
+    'Append', ...
     'Yes','No','Yes');
 switch addDiagnosisQ
     case 'Yes'
@@ -395,15 +395,17 @@ clearvars -except data_cleaned
 function [inputData] = appendDiagnoses(inputData)
         % Prompt for list of diagnoses
         if ~strcmp(inputData{1, 2, 1},'Diagnosis') %Add diagnosis column if not already exists
-            inputData = [inputData(:,1,:),cell(size(inputData(:,1),1),1,size(inputData,3)),inputData(:,2:end,:)];
-            inputData(1,2,:) = {'Diagnosis'};
+            inputData = [inputData(:,1,:),cell(size(inputData(:,1),1),3,size(inputData,3)),inputData(:,2:end,:)];
+            for i = 1:size(inputData,3)
+                inputData(1,2:4,i) = {'Diagnosis', 'DOB', 'Gender'};
+            end
         end
         
         [dFile, dPath] = uigetfile('*xlsx','Select Clinical Conductor patient list'); % get list of CC diagnoses
         [ddInt, ddStr, ddRaw] = xlsread(fullfile(dPath,dFile));
         startIdx = find(contains(ddStr(:,1),'Participant Code'),1) + 1;
         endIdx = size(ddStr,1);
-        participantList = ddStr(startIdx:endIdx,1);
+        participantList = ddStr(startIdx:endIdx,1:3);
         
         % Prompt for Diagnosis Name
         prompt = {'Enter diagnosis:'};
@@ -417,7 +419,9 @@ function [inputData] = appendDiagnoses(inputData)
                 for currentParticipant = 1:size(participantList,1)
                     if strcmp(inputData{currentRow,1,currentLeaf},participantList{currentParticipant,1})
                         inputData{currentRow,2,currentLeaf} = char(answer);
-                        disp(['Appended diagnosis ''' answer ''' to participant ', inputData{currentRow,1,currentLeaf}]);
+                        inputData{currentRow,3,currentLeaf} = participantList{currentParticipant,2};
+                        inputData{currentRow,4,currentLeaf} = participantList{currentParticipant,3};
+                        disp(['Appended diagnosis ''', char(answer) ''' to participant ', char(inputData{currentRow,1,currentLeaf})]);
                     end
                 end
             end
