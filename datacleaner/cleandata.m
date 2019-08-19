@@ -1,5 +1,5 @@
-%% OC3 DATACLEANER
-%% V1.0.0.1 - GDJ
+%% OCDC - OpenClinica Data Cleaner
+%% v0.0.1
 
 clear all;
 clc;
