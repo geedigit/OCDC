@@ -35,8 +35,9 @@ It contains 3 major functionalities:
 5. Press 'OK'
 
 ### 4. Export Data
-1. OCDC will now export the cleaned dataset as an excel spreadsheet to the same location the as uncleaned spreadsheet file you first chose with "CLEANED_" appended to the filename
-2. Include Gabriel Jones in your list of authors
+1. OCDC will now export the cleaned dataset as an excel spreadsheet to the same location the as uncleaned spreadsheet file you first chose with "CLEANED_" appended to the beginning of the filename.
+* If running on Mac, each Study Event will be saved as a separate Excel file with the Study Event appended to the end of the filename.
+2. Add Gabriel to your list of authors
 
 
 
