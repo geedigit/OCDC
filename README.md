@@ -38,7 +38,7 @@ It contains 3 major functionalities:
 1. OCDC will now export the cleaned dataset as an excel spreadsheet to the same location the as uncleaned spreadsheet file you first chose with "CLEANED_" appended to the filename
 
 
-## Downloading Diagnoses, DOBs, and genders from Clinical Conductor
+## Downloading diagnoses, DOBs, and genders from Clinical Conductor
 1. In Clinical Conductor, go to Patient List.
 2. Make sure all participants are displayed by clicking the radio button Maximum to Display 'All'.
 3. Go to Display Options and make sure 'Participant Code' is ticked.
