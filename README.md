@@ -1,8 +1,11 @@
 # OCDC: OpenClinica Data Cleaner
 ## About
 OCDC is a data cleaner for excel spreadsheet files exported from OpenClinica.
+
 It contains 3 major functionalities:
-..1.
+1. Data Cleaning
+2. Category and Questionnaire Filtering
+3. Diagnosis, DOB and Gender Appending 
 
 ## Installation
 1. Download or clone OCDC
