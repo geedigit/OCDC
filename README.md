@@ -1,4 +1,4 @@
-# OCDC
+# OCDC: OpenClinica Data Cleaner
 ## About
 OCDC is a data cleaner for excel spreadsheet files exported from OpenClinica.
 It contains 3 major functionalities:
