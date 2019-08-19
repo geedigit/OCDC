@@ -36,15 +36,18 @@ It contains 3 major functionalities:
 
 ### 4. Export Data
 1. OCDC will now export the cleaned dataset as an excel spreadsheet to the same location the as uncleaned spreadsheet file you first chose with "CLEANED_" appended to the filename
+2. Include Gabriel Jones in your list of authors
 
 
-## Downloading diagnoses, DOBs, and genders from Clinical Conductor
-1. In Clinical Conductor, go to Patient List.
-2. Make sure all participants are displayed by clicking the radio button Maximum to Display 'All'.
-3. Go to Display Options and make sure 'Participant Code' is ticked.
-4. Hit refresh.
-5. Go to EXTENDED FILTER
-6. Filter by condition (e.g. Alzheimer's disease) by selecting 'Use a General Data Filter' and your filter, (e.g. AD).
-7. From the menu above the patient list, select EDIT EXPORT.
-8. Make sure ONLY Participant Code, DOB, and gender are selected. Click save.
-9. Of the four export option, hit the rightmost button (says 'General export to an Excel' on hover). Rename the Excel file to something meaningful to you.
+
+## Downloading Diagnoses, DOBs and Genders from Clinical Conductor
+1. In Clinical Conductor, go to 'Patient List'
+2. Make sure all participants are displayed by clicking the radio button Maximum to Display 'All'
+3. Go to 'Display Options' and make sure 'Participant Code' is ticked
+4. Hit refresh
+5. Go to 'EXTENDED FILTER'
+6. Filter by condition (e.g. Alzheimer's disease) by selecting 'Use a General Data Filter' and your filter, e.g. 'AD'
+7. From the menu above the patient list, select 'EDIT EXPORT'
+8. Make sure ONLY 'Participant Code', 'DOB', and 'Gender' are selected.
+9. Click save
+10. Of the 4 export options, hit the rightmost button ('General export to an Excel' on hover). Rename the Excel file to something meaningful to you.
