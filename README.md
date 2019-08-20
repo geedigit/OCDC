@@ -6,6 +6,7 @@ It contains 3 major functionalities:
 1. Data Cleaning
 2. Category and Questionnaire Filtering
 3. Diagnosis, DOB and Gender Appending 
+4. Undiagnosed Participant Filtering
 
 ## Installation
 1. Download or clone OCDC
@@ -34,12 +35,13 @@ It contains 3 major functionalities:
 4. Enter the name of the diagnosis for that list of participants
 5. Press 'OK'
 
-### 4. Export Data
+### 4. Optional: Remove Undiagnosed Participants
+1. Click 'yes' if you would like to remove any participants in the dataset who did not have a diagnosis appended to them
+
+### 5. Export Data
 1. OCDC will now export the cleaned dataset as an excel spreadsheet to the same location the as uncleaned spreadsheet file you first chose with "CLEANED_" appended to the beginning of the filename.
 * If running on Mac, each Study Event will be saved as a separate Excel file with the Study Event appended to the end of the filename.
-2. Add Gabriel to your list of authors
-
-
+2. Add Gabriel to your list of authors, preferrably first author, but I'll take second or PI.
 
 ## Downloading Diagnoses, DOBs and Genders from Clinical Conductor
 1. In Clinical Conductor, go to 'Patient List'
