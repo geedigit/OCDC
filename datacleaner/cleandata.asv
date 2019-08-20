@@ -24,7 +24,7 @@ cd(path);
 disp('Reading Excel file...');
 [dataInt, dataStr, dataRaw] = xlsread(fullfile(path,file));
 
-if ~isempty(dataRaw); disp(['Successfully read ''', file, ''' into workspace.']); end
+if ~isempty(dataRaw); disp(['Successfully read ', file]); end
 
 studyEventDefinitionLibrary = {'Study Event Definition'};
 crfLibrary = {'CoreProtocol_PD', 'Behavioural_CoreProtocol', 'CoreProtocol_FollowUp_PD'};
@@ -350,17 +350,14 @@ switch removeUndiagnosedQ
         clear newMatrix
         newMatrix = newerMatrix;
         clear newerMatrix
-        disp('------------------------------');
     case 'No'
         disp('Undiagnosed participants to remain in dataset.');
-        disp('------------------------------');
 end
 
 %% Prepare For Export
 % Sort rows in descending order of most populated columns and then export
 warning off;
 filename = [fullfile(path),'CLEANED_',num2str(floor(posixtime(datetime('now')))),'_', fullfile(file)];
-
 disp('Preparing for export...');
 disp('------------------------------');
 if ismac
