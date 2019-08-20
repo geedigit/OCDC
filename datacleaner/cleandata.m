@@ -337,7 +337,7 @@ end
 
 %% Remove Undiagnosed Participants
 disp('------------------------------');
-removeUndiagnosedQ = questdlg('Remove undiagnosed participants from dataset?', ...
+removeUndiagnosedQ = questdlg('Remove undiagnosed and control participants from dataset?', ...
     'Append', ...
     'Yes','No','Yes');
 switch removeUndiagnosedQ
@@ -345,7 +345,7 @@ switch removeUndiagnosedQ
         for currentSheet = 1:size(newMatrix,3)
             newerMatrix(:,:,currentSheet) =  newMatrix(~cellfun(@isempty, newMatrix(:,2,currentSheet)),:,currentSheet);
             disp(['Removed ', num2str(size(newMatrix(cellfun(@isempty, newMatrix(:,2,currentSheet)),:,currentSheet),1)),...
-                ' undiagnosed participants from Study Event: ''' strrep(eventNames{currentSheet},'_',' '), '''']);
+                ' undiagnosed and control participants from Study Event: ''' strrep(eventNames{currentSheet},'_',' '), '''']);
         end
         clear newMatrix
         newMatrix = newerMatrix;
