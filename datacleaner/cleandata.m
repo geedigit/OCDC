@@ -335,25 +335,50 @@ switch addDiagnosisQ
         disp('No diagnoses appended.');
 end
 
+%% Identify Control Participants
+if strcmp(addDiagnosisQ,'Yes') && strcmp(newMatrix{1,2,1},'Diagnosis')
+    controlCounter = 0;
+    disp('------------------------------');
+    identifyControlsQ = questdlg('Identify and append controls?', ...
+        'Append', ...
+        'Yes','No','Yes');
+    switch identifyControlsQ
+        case 'Yes'
+            for currentSheet = 1:size(newMatrix,3)
+                for currentRow = 2:size(newMatrix,1)
+                    if any(strcmp(newMatrix{currentRow,1,currentSheet}(1),{'C','c'}))
+                        newMatrix{currentRow,2,currentSheet} = 'Control';
+                        controlCounter = controlCounter + 1;
+                    end
+                end
+            end
+            disp([num2str(controlCounter), ' controls identified and appended.']);
+        case 'No'
+    end
+end
+
 %% Remove Undiagnosed Participants
-disp('------------------------------');
-removeUndiagnosedQ = questdlg('Remove undiagnosed and control participants from dataset?', ...
-    'Append', ...
-    'Yes','No','Yes');
-switch removeUndiagnosedQ
-    case 'Yes'
-        for currentSheet = 1:size(newMatrix,3)
-            newerMatrix(:,:,currentSheet) =  newMatrix(~cellfun(@isempty, newMatrix(:,2,currentSheet)),:,currentSheet);
-            disp(['Removed ', num2str(size(newMatrix(cellfun(@isempty, newMatrix(:,2,currentSheet)),:,currentSheet),1)),...
-                ' undiagnosed and control participants from Study Event: ''' strrep(eventNames{currentSheet},'_',' '), '''']);
-        end
-        clear newMatrix
-        newMatrix = newerMatrix;
-        clear newerMatrix
-        disp('------------------------------');
-    case 'No'
-        disp('Undiagnosed participants to remain in dataset.');
-        disp('------------------------------');
+if strcmp(addDiagnosisQ,'Yes')
+    
+    disp('------------------------------');
+    removeUndiagnosedQ = questdlg('Remove undiagnosed participants from dataset?', ...
+        'Append', ...
+        'Yes','No','Yes');
+    switch removeUndiagnosedQ
+        case 'Yes'
+            for currentSheet = 1:size(newMatrix,3)
+                newerMatrix(:,:,currentSheet) =  newMatrix(~cellfun(@isempty, newMatrix(:,2,currentSheet)),:,currentSheet);
+                disp(['Removed ', num2str(size(newMatrix(cellfun(@isempty, newMatrix(:,2,currentSheet)),:,currentSheet),1)),...
+                    ' undiagnosed and participants from Study Event: ''' strrep(eventNames{currentSheet},'_',' '), '''']);
+            end
+            clear newMatrix
+            newMatrix = newerMatrix;
+            clear newerMatrix
+            disp('------------------------------');
+        case 'No'
+            disp('Undiagnosed participants to remain in dataset.');
+            disp('------------------------------');
+    end
 end
 
 %% Prepare For Export
@@ -445,8 +470,7 @@ function [inputData] = appendDiagnoses(inputData)
         end
         
         [dFile, dPath] = uigetfile('*.xlsx','Select Clinical Conductor patient list'); % get list of CC diagnoses
-        if ~isa(dFile,'char') || ~exist('file'); disp('No diagnosis file selected.'); return; end
-        
+        if ~isa(dFile,'char') || ~exist('dFile'); disp('No diagnosis file selected.'); return; end
         [ddInt, ddStr, ddRaw] = xlsread(fullfile(dPath,dFile));
         startIdx = find(contains(ddStr(:,1),'Participant Code'),1) + 1;
         endIdx = size(ddStr,1);
