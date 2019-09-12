@@ -3,11 +3,14 @@
 
 clear all;
 clc;
+folder = fileparts(which('datacleaner.m'));
+addpath(genpath(folder));
 addpath('utils');
 addpath('utils/xlwrite');
 addpath('utils/xlwrite/poi_library');
+
 if ismac
-    run('utils/xlwrite/firstlaunch_xlwrite.m');
+    run('firstlaunch_xlwrite.m');
     disp('Added Mac export capability.');
 end
 
