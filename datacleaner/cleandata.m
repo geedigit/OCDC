@@ -477,7 +477,7 @@ function [inputData] = appendDiagnoses(inputData)
         [ddInt, ddStr, ddRaw] = xlsread(fullfile(dPath,dFile));
         startIdx = find(contains(ddStr(:,1),'Participant Code'),1) + 1;
         endIdx = size(ddStr,1);
-        participantList = ddStr(startIdx:endIdx,1:3);
+        participantList = ddRaw(startIdx:endIdx,1:3);
         
         % Prompt for Diagnosis Name
         prompt = {'Enter diagnosis:'};
