@@ -30,7 +30,7 @@ It contains 4 major functionalities:
 
 ### 3. Optional: Append Diagnoses, DOBs and Gender
 1. OCDC can append Clinical Conductor diagnoses, DOBs and genders to the OpenClinica dataset
-2. This requires a participant list to be exported from Clinical Conductor (see instructions below)
+2. This requires a participant list to be exported from Clinical Conductor
 3. If you would like to append this information, click 'yes' and select the Clinical Conductor patient list
 4. Enter the name of the diagnosis for that list of participants
 5. Press 'OK'
